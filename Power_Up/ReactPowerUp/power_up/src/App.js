@@ -1,12 +1,21 @@
 import React from 'react';
 import './App.css';
-import Dash from './components/Dash';
+import Nav from './components/Nav';
+import Body from './components/Body';
+import Footer from './components/Footer';
 
 function App() {
   return (
-    <div>
-      <Dash item1="Mango" item2="Banana" item3="Pineapple"/>
-    </div>
+    <div className="App">
+      <Nav/>
+      <div className="body">
+        <Body/>
+        <Body/>
+        <Body/>
+        <Body/>
+      </div>
+      <Footer />
+    </div >
   );
 }
 
