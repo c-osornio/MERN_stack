@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const UserForm = (props) => {
-    const [error, setError] = useState(false);
+    // const [isValid, setIsValid] = useState(false);
     const [firstName, setFirstName] = useState("");
     const [firstNameError, setFirstNameError] = useState("");
     const [lastName, setLastName] = useState("");
@@ -13,19 +13,25 @@ const UserForm = (props) => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [confirmPasswordError, setConfirmPasswordError] = useState("");
     const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false);
+    const [Users, setUsers] = useState([]);
+    
+    // useEffect( ( ) => {
+    //         validate()
+    // },[ firstName, lastName, email, password, confirmPassword, firstNameError, lastNameError, emailError, passwordError, confirmPasswordError ] );
+
+    const hasBlanks = !firstName || !lastName || !email || !password || !confirmPassword 
+    const hasErrors  = firstNameError || lastNameError || emailError || passwordError || confirmPasswordError
+    const valid = !hasBlanks && !hasErrors
 
     const handleFirstName = (e) => {
         setFirstName(e.target.value);
         if(e.target.value.length < 1) {
             setFirstNameError("First name is required!");
-            validate()
         } else if(e.target.value.length < 2) {
             setFirstNameError("First name must be 2 characters or longer!");
-            validate()
         } else {
             setFirstNameError("");
             console.log(firstNameError); 
-            validate();
         }
     }
 
@@ -33,13 +39,11 @@ const UserForm = (props) => {
         setLastName(e.target.value);
         if(e.target.value.length < 1) {
             setLastNameError("Last name is required!");
-            validate()
+
         } else if(e.target.value.length < 2) {
             setLastNameError("Last name must be 2 characters or longer!");
-            validate()
         } else {
             setLastNameError("");
-            validate();
         }
     }
 
@@ -47,13 +51,10 @@ const UserForm = (props) => {
         setEmail(e.target.value);
         if(e.target.value.length < 1) {
             setEmailError("Email is required!");
-            validate()
         } else if(e.target.value.length < 5) {
             setEmailError("Email must be 5 characters or longer!");
-            validate()
         } else {
             setEmailError("");
-            validate();
         }
     }
 
@@ -61,13 +62,10 @@ const UserForm = (props) => {
         setPassword(e.target.value);
         if(e.target.value.length < 1) {
             setPasswordError("Password is required!");
-            validate()
         } else if(e.target.value.length < 8) {
             setPasswordError("Password must be 8 characters or longer!");
-            validate()
         } else {
             setPasswordError("");
-            validate()
         }
     }
 
@@ -75,37 +73,32 @@ const UserForm = (props) => {
         setConfirmPassword(e.target.value);
         if(e.target.value.length < 1) {
             setConfirmPasswordError("Confirm password is required!");
-            validate()
         } else if(e.target.value !== password) {
             setConfirmPasswordError("Password and confirm password do not match!");
-            validate()
         } else {
             setConfirmPasswordError("");
-            validate();
         }
     }
 
-    const validate = () => {
-        if(firstNameError || lastNameError || emailError || passwordError || confirmPasswordError) {
-            setError(true);
-        } else {
-            setError(false);
-        }
-    }
+    // const validate = () => {
+    //     const anyBlanks = !firstName || !lastName || !email || !password || !confirmPassword 
+    //     if(!firstNameError && !lastNameError && !emailError && !passwordError && !confirmPasswordError && !anyBlanks ) {
+    //         setIsValid(true);
+    //     } else {
+    //         setIsValid(false);
+    //     }
+    // }
 
     const createUser = (e) => {
-        if( error === true ) {
-            e.preventDefault();
-            const newUser = { firstName, lastName, email, password };
-            setFirstName("");
-            setLastName("");
-            setEmail("");
-            setPassword("");
-            setConfirmPassword("");
-            setHasBeenSubmitted(true);
-        } else {
-            return;
-        }
+        e.preventDefault();
+        const newUser = { firstName, lastName, email, password };
+        setUsers([...Users, newUser])
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+        setHasBeenSubmitted(true);
     }
 
     return (
@@ -162,7 +155,9 @@ const UserForm = (props) => {
                             null
                         }
                     </div>
-                    <input type="submit" value="Create User" />
+
+                    <input type="submit" value="Create User" disabled={!valid} />
+
                 </form>
             </fieldset>
             <div>
