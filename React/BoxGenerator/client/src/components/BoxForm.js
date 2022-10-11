@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import styles from './BoxForm.module.css'
 
-const BoxForm = () => {
-    const [boxes, setBoxes] = useState([])
+const BoxForm = (props) => {
+    const { boxes, setBoxes } = props;
+
     const [color, setColor] = useState("");
     const [size, setSize] = useState("");
 
     const handleColor = (e) => {
         setColor(e.target.value);
-
     }
     
     const handleSize = (e) => {
@@ -36,12 +36,6 @@ const BoxForm = () => {
                 </div>
                 <input type="submit" value="Add" />
             </form>
-            <div className={styles.boxContainer}>
-                
-                {
-                    boxes.map((box) =><div className={styles.box} style={{ backgroundColor: box.color, width: box.size, height: box.size}} > {box.size}px </div>)
-                }
-            </div>
         </>
     )
 }
