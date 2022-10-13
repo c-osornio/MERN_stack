@@ -6,7 +6,7 @@ const Display = (props) => {
     return (
         <div className={styles.boxContainer}> 
         {
-            boxes.map((box) =><div className={styles.box} style={{ backgroundColor: box.color, width: box.size, height: box.size}} ></div>)
+            boxes.map((item, index) =><div key={index} className={styles.box} style={{ backgroundColor: item.color || "white", width: item.size || 100, height: item.size || 100 }} ></div>)
         }
     </div>
     )
