@@ -1,0 +1,11 @@
+.App {
+  text-align: center;
+  margin: 10px auto;
+  position: relative;
+  width: 600px;
+  height: 300px;
+  background: teal;
+  border: 2px solid black;
+  border-radius: 10%;
+  padding: 10px;
+}
