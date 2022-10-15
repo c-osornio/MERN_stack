@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>First Gen Shiny Pokemon!</h1>
+      <h1>All 905 Shiny Pokemon!</h1>
       <Cards state = {state} setState = {setState} />
     </div>
   );

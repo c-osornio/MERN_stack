@@ -6,7 +6,7 @@ const Cards = (props) => {
     const {state, setState} = props
     
     useEffect( () => {
-        fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151')
+        fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=905')
         .then((result)=> {
             console.log(result)
             return result.json()
@@ -19,7 +19,7 @@ const Cards = (props) => {
             console.log("Bad call or other error")
             console.log(err)
         })
-    }, [] )
+    }, [] );
 
 
     return (
