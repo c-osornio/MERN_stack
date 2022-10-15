@@ -1,0 +1,17 @@
+.pokemon {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.card {
+    border: 2px solid maroon;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    align-items: center;
+    padding-bottom: 15px;
+}
