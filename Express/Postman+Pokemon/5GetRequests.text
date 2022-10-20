@@ -1,0 +1,139 @@
+Make 5 different GET requests with Postman to retrieve 5 different pokemon through the pokemonAPI 
+Copy the URL you used along with the results you received from the API into a text document and upload that document to complete this assignment
+1. https://pokeapi.co/api/v2/pokemon/778
+2. https://pokeapi.co/api/v2/pokemon/charizard
+3. https://pokeapi.co/api/v2/pokemon/69
+4. https://pokeapi.co/api/v2/pokemon/mewtwo
+5. https://pokeapi.co/api/v2/pokemon/zapdos
+
+Mimikyu:
+{
+    "abilities": [
+        {
+            "ability": {
+                "name": "disguise",
+                "url": "https://pokeapi.co/api/v2/ability/209/"
+            },
+            "is_hidden": false,
+            "slot": 1
+        }
+    ],
+    "base_experience": 167,
+    "forms": [
+        {
+            "name": "mimikyu-disguised",
+            "url": "https://pokeapi.co/api/v2/pokemon-form/778/"
+        }
+    ],
+
+Charizard:
+{
+    "abilities": [
+        {
+            "ability": {
+                "name": "blaze",
+                "url": "https://pokeapi.co/api/v2/ability/66/"
+            },
+            "is_hidden": false,
+            "slot": 1
+        },
+        {
+            "ability": {
+                "name": "solar-power",
+                "url": "https://pokeapi.co/api/v2/ability/94/"
+            },
+            "is_hidden": true,
+            "slot": 3
+        }
+    ],
+    "base_experience": 267,
+    "forms": [
+        {
+            "name": "charizard",
+            "url": "https://pokeapi.co/api/v2/pokemon-form/6/"
+        }
+    ],
+
+Bellsprout: 
+{
+    "abilities": [
+        {
+            "ability": {
+                "name": "chlorophyll",
+                "url": "https://pokeapi.co/api/v2/ability/34/"
+            },
+            "is_hidden": false,
+            "slot": 1
+        },
+        {
+            "ability": {
+                "name": "gluttony",
+                "url": "https://pokeapi.co/api/v2/ability/82/"
+            },
+            "is_hidden": true,
+            "slot": 3
+        }
+    ],
+    "base_experience": 60,
+    "forms": [
+        {
+            "name": "bellsprout",
+            "url": "https://pokeapi.co/api/v2/pokemon-form/69/"
+        }
+    ],
+
+MewTwo: 
+{
+    "abilities": [
+        {
+            "ability": {
+                "name": "pressure",
+                "url": "https://pokeapi.co/api/v2/ability/46/"
+            },
+            "is_hidden": false,
+            "slot": 1
+        },
+        {
+            "ability": {
+                "name": "unnerve",
+                "url": "https://pokeapi.co/api/v2/ability/127/"
+            },
+            "is_hidden": true,
+            "slot": 3
+        }
+    ],
+    "base_experience": 340,
+    "forms": [
+        {
+            "name": "mewtwo",
+            "url": "https://pokeapi.co/api/v2/pokemon-form/150/"
+        }
+    ],
+
+Zapdos: 
+{
+    "abilities": [
+        {
+            "ability": {
+                "name": "pressure",
+                "url": "https://pokeapi.co/api/v2/ability/46/"
+            },
+            "is_hidden": false,
+            "slot": 1
+        },
+        {
+            "ability": {
+                "name": "static",
+                "url": "https://pokeapi.co/api/v2/ability/9/"
+            },
+            "is_hidden": true,
+            "slot": 3
+        }
+    ],
+    "base_experience": 290,
+    "forms": [
+        {
+            "name": "zapdos",
+            "url": "https://pokeapi.co/api/v2/pokemon-form/145/"
+        }
+    ],
