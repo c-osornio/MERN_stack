@@ -41,18 +41,22 @@ app.get('/api', (req, res) => {
 app.post('/api/user', (req, res) => {
     User.create(req.body)
         .then((user) => {
-            res.json({ user })
+            res.json({ user : user })
         })
         .catch((err) => {
-            res.json({ msg: "Error:", err })
+            res.json({ message: 'Something went wrong', error: err })
         })
 })
 
 // Read
 app.get('/api/allUsers', (req, res) => {
     User.find({})
-        .then((users) => res.json({ users }))
-        .catch((err) => console.log(err))
+        .then((users) => {
+            res.json({ users : users })
+        })
+        .catch((err) => {
+            res.json({ message: 'Something went wrong', error: err })
+        })
 })
 
 // Update
@@ -62,13 +66,23 @@ app.put('/api/editUser/:id', (request, response) => {
         request.body,
         { new: true, runValidators: true }
     )
-        .then((updateUser) => response.json(updateUser))
-        .catch((err) => console.log(err))
+        .then(updatedUser => {
+            res.json({ user: updatedUser })
+        })
+        .catch((err) => {
+            res.json({ message: 'Something went wrong', error: err })
+        })
 })
 
 // Delete
 app.delete('api/deleteUser/:id', (request, response) => {
-    User.remove({_id: request.params.id})
+    User.deleteOne({_id: request.params.id})
+    .then(result => {
+        res.json({ result: result })
+    })
+    .catch((err) => {
+        res.json({ message: 'Something went wrong', error: err })
+    })
 })
 
 
