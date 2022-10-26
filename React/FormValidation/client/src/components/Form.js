@@ -123,7 +123,7 @@ const Form = (props) => {
                 type: "SET_EMAIL_ERROR",
                 payload: "Email must be at least 5 characters"
             });
-        } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(e.target.value)) {
+        } else if (!/^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/.test(e.target.value)) {
             dispatch({ 
                 type: "SET_EMAIL_ERROR", 
                 payload: "Invalid email address."
