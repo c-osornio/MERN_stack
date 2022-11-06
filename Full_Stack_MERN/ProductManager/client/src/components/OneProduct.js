@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/Container';
@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 const ProductView = () => {
     const { id } = useParams();
     const [product, setProduct] = useState({});
+    const navigate = useNavigate()
 
     useEffect(() => {
         axios
@@ -20,6 +21,17 @@ const ProductView = () => {
                 console.log(err);
             });
     }, [id]);
+
+    const handleDelete=()=>{
+        axios.delete(`http://localhost:8000/api/products/${id}`)
+        .then((res)=>{
+            console.log(res)
+            navigate('/products')
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    }
 
     return (
         <>
@@ -46,7 +58,8 @@ const ProductView = () => {
                                 <h4>"{product.description}"</h4>
                             </td>
                             <td>
-                                <Button variant="danger">Update and Delete</Button>
+                                <Button className= "me-3" variant="warning" onClick={() => navigate(`/products/edit/${product._id}`)}>Update</Button>
+                                <Button variant="danger" onClick={(e)=>{handleDelete(product._id)}}>Delete</Button>
                             </td>
                         </tr>
                     </tbody>

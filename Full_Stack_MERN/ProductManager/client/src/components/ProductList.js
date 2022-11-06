@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
 const ProductList = (props) => {
-    const {products, setProducts} = props;
+    const {removeFromDom, products, setProducts} = props;
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -18,8 +18,20 @@ const ProductList = (props) => {
             .catch((err) => {
                 console.log(err);
             })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    const handleDelete=(productId)=>{
+        axios.delete(`http://localhost:8000/api/products/${productId}`)
+        .then((res)=>{
+            console.log(res)
+            removeFromDom(productId)
+            navigate('/products')
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    }
 
     return (
         <div>
@@ -45,7 +57,9 @@ const ProductList = (props) => {
                                             <h4 className="text-capitalize text-warning">{item.title}</h4>
                                         </td>
                                         <td>
-                                            <Button onClick={() => navigate(`/products/${item._id}`)}>View Product</Button>
+                                            <Button className= "me-3" onClick={() => navigate(`/products/${item._id}`)}>View Product</Button>
+                                            <Button className= "me-3" variant="warning" onClick={() => navigate(`/products/edit/${item._id}`)}>Update</Button>
+                                            <Button variant="danger" onClick={(e)=>{handleDelete(item._id)}}>Delete</Button>
                                         </td>
                                     </tr>
                             ))

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import {useParams} from 'react-router-dom'
@@ -18,7 +19,6 @@ const View = () => {
                 console.log(err)
                 setErrors(err)
             })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
