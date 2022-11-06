@@ -1,5 +1,6 @@
 import './App.css';
-import ProductForm from "./components/ProductForm";
+import Main from "./views/Main";
+import ViewOne from "./views/ViewOne";
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
 
 
@@ -9,8 +10,15 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element= {<Navigate to="/products/new" />} />
-          <Route path="/products/new" element={<ProductForm/>} />
+          {/* Home */}
+          <Route path="/" element= {<Navigate to="/products" />} />
+
+          {/* Create and Read */}
+          <Route path="/products" element={<Main/>} />  
+          <Route path="/products/:id" element = {<ViewOne/>} />
+
+          {/* Update */}
+
         </Routes>
       </BrowserRouter>
     </div>

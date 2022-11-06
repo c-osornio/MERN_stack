@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styles from './ProductForm.module.css';
+import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -9,6 +10,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 
 const ProductForm = (props) => {
+    const { products, setProducts } = props;
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
@@ -24,6 +26,7 @@ const ProductForm = (props) => {
         axios.post("http://localhost:8000/api/products", product)
             .then((res) => {
                 console.log(res.data);
+                setProducts([...products, product]);
                 setTitle("");
                 setPrice("");
                 setDescription("");
@@ -36,11 +39,7 @@ const ProductForm = (props) => {
 
     return (
         <div>
-
-            <header>
-                <h1 className= "mb-5">Product Manager</h1>
-            </header>
-            <div className= {styles.form} >
+            <Container className= {styles.form}>
                 <h2>New Product</h2>
                 <Form onSubmit={submitHandler}>
                     <Form.Group className="mb-3">
@@ -71,7 +70,7 @@ const ProductForm = (props) => {
                     </Form.Group>
                     <Button variant="primary" type="submit">Create Product</Button>
                 </Form>
-            </div>
+            </Container>
 
         </div>
     );
