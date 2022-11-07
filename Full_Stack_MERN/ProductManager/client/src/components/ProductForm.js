@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
-import styles from './ProductForm.module.css';
-import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -10,11 +7,10 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 
 const ProductForm = (props) => {
-    const { products, setProducts } = props;
-    const [title, setTitle] = useState("");
-    const [price, setPrice] = useState("");
-    const [description, setDescription] = useState("");
-    const [errors, setErrors] = useState({});
+    const {initialTitle, initialPrice, initialDescription, onSubmitProp, errors} = props;
+    const [title, setTitle] = useState(initialTitle);
+    const [price, setPrice] = useState(initialPrice);
+    const [description, setDescription] = useState(initialDescription);
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -23,30 +19,18 @@ const ProductForm = (props) => {
             price,
             description
         }
-        axios.post("http://localhost:8000/api/products", product)
-            .then((res) => {
-                console.log(res.data);
-                setProducts([...products, product]);
-                setTitle("");
-                setPrice("");
-                setDescription("");
-            })
-            .catch((err) => {
-                console.log(err);
-                setErrors(err.response.data.error.errors)
-            })
+        onSubmitProp(product)
+        
     }
 
     return (
-        <div>
-            <Container className= {styles.form}>
-                <h2>New Product</h2>
+        <>
                 <Form onSubmit={submitHandler}>
                     <Form.Group className="mb-3">
                         <Form.Label>Title</Form.Label>
-                        <Form.Control onChange={ (e) => setTitle(e.target.value)} value={title} name="title" type="text" placeholder="Enter title"/>
+                        <Form.Control className="text-capitalize" onChange={ (e) => setTitle(e.target.value)} value={title} name="title" type="text" placeholder="Enter title"/>
                         { 
-                        errors.title && (<Form.Text>{errors.title.message}</Form.Text>)
+                        errors.title && (<Form.Text className="text-danger fs-4">{errors.title.message}</Form.Text>)
                         }
                     </Form.Group>
                     <Form.Group className="mb-3">
@@ -56,23 +40,21 @@ const ProductForm = (props) => {
                             <Form.Control onChange={(e) => setPrice(e.target.value)} value={price} name="price" type="number" placeholder="Enter price" min="0.00"  step="0.01"/>
                         </InputGroup>
                         { 
-                        errors.price && (<Form.Text>{errors.price.message}</Form.Text>)
+                        errors.price && (<Form.Text className="text-danger fs-4">{errors.price.message}</Form.Text>)
                         }
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Description</Form.Label>
                         <FloatingLabel label="Description: ">
-                            <Form.Control onChange={(e) => setDescription(e.target.value)} value={description} name="description" type="text" placeholder="Enter description" as="textarea" style={{ height: '100px' }}/>
+                            <Form.Control onChange={(e) => setDescription(e.target.value)} className="text-capitalize" value={description} name="description" type="text" placeholder="Enter description" as="textarea" style={{ height: '100px' }}/>
                         </FloatingLabel>
                         { 
-                        errors.description && (<Form.Text>{errors.description.message}</Form.Text>)
+                        errors.description && (<Form.Text className="text-danger fs-4">{errors.description.message}</Form.Text>)
                         }
                     </Form.Group>
-                    <Button variant="primary" type="submit">Create Product</Button>
+                    <Button variant="primary" type="submit">Submit</Button>
                 </Form>
-            </Container>
-
-        </div>
+        </>
     );
 };
 

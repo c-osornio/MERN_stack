@@ -4,15 +4,15 @@ import axios from "axios";
 import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
+import DeleteButton from './DeleteButton';
 
-const ProductView = () => {
+const Details = () => {
     const { id } = useParams();
     const [product, setProduct] = useState({});
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios
-            .get(`http://localhost:8000/api/products/${id}`)
+        axios.get(`http://localhost:8000/api/products/${id}`)
             .then((res) => {
                 console.log(res.data);
                 setProduct(res.data);
@@ -22,15 +22,8 @@ const ProductView = () => {
             });
     }, [id]);
 
-    const handleDelete=()=>{
-        axios.delete(`http://localhost:8000/api/products/${id}`)
-        .then((res)=>{
-            console.log(res)
-            navigate('/products')
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
+    const removeFromDom = productId => {
+        setProduct(product.filter(product => product._id !== productId)); 
     }
 
     return (
@@ -39,15 +32,17 @@ const ProductView = () => {
                 <h1 className= "text-capitalize">{product.title}</h1>
                 <Table striped hover size="sm">
                     <thead>
-                        <th>
-                            <h4 className="text-success">Price:</h4>
-                        </th>
-                        <th>
-                            <h4 className="text-success">Description:</h4>
-                        </th>
-                        <th>
-                            <h4 className="text-success">Actions:</h4>
-                        </th>
+                        <tr>
+                            <th>
+                                <h4 className="text-success">Price:</h4>
+                            </th>
+                            <th>
+                                <h4 className="text-success">Description:</h4>
+                            </th>
+                            <th>
+                                <h4 className="text-success">Actions:</h4>
+                            </th>
+                        </tr>
                     </thead>
                     <tbody>
                         <tr>
@@ -59,7 +54,7 @@ const ProductView = () => {
                             </td>
                             <td>
                                 <Button className= "me-3" variant="warning" onClick={() => navigate(`/products/edit/${product._id}`)}>Update</Button>
-                                <Button variant="danger" onClick={(e)=>{handleDelete(product._id)}}>Delete</Button>
+                                <DeleteButton productId={product._id} successCallback={()=>removeFromDom(product._id)} />
                             </td>
                         </tr>
                     </tbody>
@@ -69,4 +64,4 @@ const ProductView = () => {
     )
 }
 
-export default ProductView
+export default Details
