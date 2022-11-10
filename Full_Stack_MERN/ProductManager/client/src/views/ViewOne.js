@@ -11,6 +11,7 @@ const ViewOne = () => {
             <Nav/>
             <Details/>
             <Link to="/products"><Button>Go Back</Button></Link>
+            
         </>
     )
 }

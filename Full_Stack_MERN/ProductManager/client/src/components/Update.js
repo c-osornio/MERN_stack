@@ -11,6 +11,10 @@ const Update = (props) => {
     const [product, setProduct] = useState({})
     const [errors, setErrors] = useState({});
     const [loaded, setLoaded] = useState(false);
+    const [title, setTitle] = useState('');
+    const [price, setPrice] = useState('');
+    const [description, setDescription] = useState('');
+    const [favorite, setFavorite] = useState(false)
 
     const navigate = useNavigate();
 
@@ -19,6 +23,10 @@ const Update = (props) => {
         .then((res) => {
             console.log(res.data);
             setProduct(res.data);
+            setTitle(res.data.title);
+            setPrice(res.data.price);
+            setDescription(res.data.description);
+            setFavorite(res.data.favorite)
             setLoaded(true);
         })
         .catch((err) => {
@@ -45,7 +53,7 @@ const Update = (props) => {
             <Container className= {styles.form}>
                 <h2>Update Product</h2>
                 {
-                    loaded && <ProductForm onSubmitProp={updateProduct} initialTitle={product.title} initialPrice={product.price} initialDescription={product.description} errors={errors} />
+                    loaded && <ProductForm onSubmitProp={updateProduct} title={title} price={price} description={description} errors={errors} setTitle={setTitle} setPrice={setPrice} setDescription={setDescription} favorite={favorite}/>
                 }
                 <br/>
                 <DeleteButton productId={product._id} successCallback={() => navigate("/products")} />
