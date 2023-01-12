@@ -2,6 +2,22 @@
   text-align: center;
 }
 
+.background {
+  background-image: url(https://c0.wallpaperflare.com/preview/552/430/468/table-notepad-book-stack-glasses.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.todo {
+  margin: 12em 0 0 40em;
+  color: black;
+}
+
+.list {
+  margin: 8em 0 0 40em;
+  color: black;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

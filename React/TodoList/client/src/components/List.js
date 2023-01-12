@@ -24,14 +24,14 @@ const List = (props) => {
 
     return (
         <div>
-            <h2>List</h2>
-            <div>
+            <div className="list">
+            <h2>TASKS:</h2>
                 {
                     list.map((item, index) => (
-                        <div>
-                            <span style={item.complete ? taskComplete : null } >{item.todo}</span>
-                            <input type="checkbox" onClick= {() =>handleToggle(index)} checked={item.complete} />
-                            <button onClick={()=>handleDelete(index)} disabled= {!item.complete} >Delete</button>
+                        <div className="mt-3">
+                            <strong className="lead bolder" style={item.complete ? taskComplete : null } >{item.todo}</strong>
+                            <input className="ms-3" type="checkbox" onClick= {() =>handleToggle(index)} checked={item.complete} />
+                            <button className="ms-5 btn btn-danger" onClick={()=>handleDelete(index)} disabled= {!item.complete} >Delete</button>
                         </div>
                     ))
                 }
